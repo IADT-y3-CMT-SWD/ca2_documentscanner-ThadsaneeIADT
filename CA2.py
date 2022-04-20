@@ -7,8 +7,8 @@ import numpy as np
 
 
 ########################################################################
-webCamFeed = True  # set to false if no webcam available
-pathImage = "Imagepi\\image004.jpg"
+webCamFeed = False  # no webcam available therefore set to False
+pathImage = "Imagepi\\puppy.jpg"
 # main webcam -> 0
 cap = cv2.VideoCapture(0)
 cap.set(10, 160)
@@ -61,7 +61,7 @@ while True:
     cv2.imshow("4. Canny", imgCanny)
     cv2.imshow("5. Dilate", imgDial)
     cv2.imshow("6. Treshold", imgThreshold)
-    #cv2.imshow("7. imgContours", imgContours)
+    #cv2.imshow("7. imgContours", imgContours) #detects edges and contours 
 
 #user interaction 
     # Press x  on keyboard to  exit
