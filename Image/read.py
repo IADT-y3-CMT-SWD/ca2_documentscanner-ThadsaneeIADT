@@ -2,7 +2,7 @@
 
 import cv2 as cv 
 
-img = cv.imread('Photos/puppy.jpg')
+img = cv.imread('Scanned/puppy.jpg')
 
 cv.imshow('Puppy', img)
 
