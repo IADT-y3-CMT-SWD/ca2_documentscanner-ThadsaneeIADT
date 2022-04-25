@@ -5,7 +5,7 @@ import numpy as np
 
 ########################################################################
 webCamFeed = False  # no webcam available therefore set to False
-pathImage = "Image\\image004.jpg"
+pathImage = "Source\\Image\\image004.jpg"
 # main webcam -> 0
 cap = cv2.VideoCapture(0)
 cap.set(10, 160)
@@ -98,16 +98,17 @@ while True:
     imgDial = cv2.dilate(imgCanny, kernel, iterations=2)  # APPLY DILATION
     imgThreshold = cv2.erode(imgDial, kernel, iterations=1)  # APPLY EROSION
 
-    imgContours = img.copy()
+    imgContours = img.copy() #copying the original image 
 
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     contours, hierarchy = cv2.findContours(imgThreshold, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    cv2.drawContours(imgThreshold, contours, -1, (0,255,0), 10) #draw all the detected contours (-1 is for all)
+    blue = (0,0,255)
+    cv2.drawContours(imgThreshold, contours, -1, blue, 5) #the function draws a contour outlines in the image (-1 means detect for all)
 
     biggest, max_area = biggestContour(contours) #calling biggest contour, using contour found from imgThreshold
     pointsNew = reorder(biggest) #calling reorder to reorder the biggeest contour
-    drawRect = drawRectangle(imgContours, pointsNew, 9) #drawing a rectangle
+    drawRect = drawRectangle(imgContours, pointsNew, 5) #drawing a rectangle
 
     point1= np.float32(pointsNew)#float32 is funtion/method, np. is the library numpy
     point2= np.float32([[0,0],[widthImg, 0], [0,heightImg], [widthImg, heightImg]])
@@ -115,9 +116,7 @@ while True:
     matrix = cv2.getPerspectiveTransform(point1, point2)
     imgWarpColour = cv2.warpPerspective(imgContours, matrix, (widthImg, heightImg))
 
-    green = (0,255,0)
-    blue = (0,0,255)
-    cv2.circle(imgWarpColour, (100, 100), 10, blue,5) #creating watermark
+    cv2.circle(imgWarpColour, (100,200), 10, blue,5) #creating watermark
 
     # cv2.imshow("1. Original", img)
     # cv2.imshow("2. Grayscale", imgGray)
@@ -140,7 +139,7 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord('s'):
         print("saving")
         # save image to folder using cv2.imwrite()
-        cv2.imwrite("Scan/myImage"+str(count)+".jpg", imgWarpColour)
+        cv2.imwrite("Source/Scan/myImage"+str(count)+".jpg", imgWarpColour)
         cv2.waitKey(300)
         count += 1
 
