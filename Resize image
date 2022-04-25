@@ -1,0 +1,29 @@
+
+#resizing pictures 
+
+from configparser import Interpolation
+from tkinter import Frame
+import cv2
+from cv2 import IMREAD_UNCHANGED
+from cv2 import imread
+from cv2 import IMREAD_GRAYSCALE
+from cv2 import imshow 
+from cv2 import imwrite 
+from cv2 import waitKey
+from cv2 import destroyAllWindows
+from cv2 import resize
+
+print(cv2.__version__)
+
+img = imread('Image/pup.jpg')
+imshow('Puppy', img) #show the image
+
+def rescaleFrame(frame, scale= 0.75):
+    width = frame.shape[1]*scale
+    height = frame.shape[0]*scale 
+    dimentions = (width,height)
+
+    return resize(frame,dimentions, interpolation = cv2.INTER_AREA)
+
+resized_image = rescaleFrame(img)
+cv2.imshow ('Image', resized_image)
