@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 
 ########################################################################
-webCamFeed = False  # no webcam available therefore set to False
+webCamFeed = True  # no webcam available therefore set to False
 pathImage = "Image\\image004.jpg"
 # main webcam -> 0
 cap = cv2.VideoCapture(0)
