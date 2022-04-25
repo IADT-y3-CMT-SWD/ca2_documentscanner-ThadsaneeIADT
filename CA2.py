@@ -8,7 +8,7 @@ import numpy as np
 
 ########################################################################
 webCamFeed = False  # no webcam available therefore set to False
-pathImage = "Imagepi\\puppy.jpg"
+pathImage = "Image\\pup.jpg"
 # main webcam -> 0
 cap = cv2.VideoCapture(0)
 cap.set(10, 160)
